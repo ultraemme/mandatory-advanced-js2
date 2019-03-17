@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Add from './components/Add';
 import Edit from './components/Edit';
 import Details from './components/Details';
-import Main from './components/Main';
+import Home from './components/Home';
 
 class App extends Component {
   constructor(props) {
@@ -15,11 +15,8 @@ class App extends Component {
     this.state = {};
   }
 
-  componentDidMount () {
-    axios.get('http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000/movies')
-      .then(res => {
-        this.setState({res: res.data});
-      })
+  getId(e) {
+    this.setState({id: e.target.parentNode.parentNode.id});
   }
 
   render() {
@@ -28,16 +25,15 @@ class App extends Component {
         <div>
           <nav>
             <ul>
-              <li><Link to="/main/">Main</Link></li>
+              <li><Link to="/home/">Main</Link></li>
               <li><Link to="/add/">Add movie</Link></li>
               <li><Link to="/edit/">Edit movie</Link></li>
-              <li><Link to="/details/">Details</Link></li>
             </ul>
           </nav>
-          <Route path="/main/" component={() => <Main data={this.state.res}/>}/>
+          <Route path="/home/" component={() => <Home getId={this.getId.bind(this)}/>}/>
           <Route path="/add/" component={Add}/>
           <Route path="/edit/" component={Edit}/>
-          <Route path="/details/" component={Details}/>
+          <Route path="/details/" component={() => <Details id={this.state.id}/>}/>
         </div>
       </Router>
     );
