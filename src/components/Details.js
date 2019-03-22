@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import { Helmet } from 'react-helmet'
 
 class Details extends Component {
   constructor(props) {
@@ -13,19 +14,23 @@ class Details extends Component {
         this.setState({res: res.data});
       })
   }
- //https://hashnode.com/post/reactjs-how-to-render-components-only-after-successful-asynchronous-call-ciwvnkjr400sq7t533lvrpdtw
+
   render() {
     return (
       <>
+        <Helmet>
+          <title>Details</title>
+        </Helmet>
         <h1>Details</h1>
         { this.state.res &&
           <>
             <p>ID: {this.props.id}</p>
             <p>Title: {this.state.res.title}</p>
+            <p>Director: {this.state.res.director}</p>
             <p>Description: {this.state.res.description}</p>
+            <p>Rating: {this.state.res.rating}</p>
           </>
         }
-
       </>
     );
   }

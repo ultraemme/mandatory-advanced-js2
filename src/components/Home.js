@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Details from './Details';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
+import Delete from './Delete';
+import { Helmet } from 'react-helmet'
 
 class Home extends Component {
   constructor(props) {
@@ -15,9 +16,11 @@ class Home extends Component {
         let tbody = res.data.map(movie => {
           return (
             <tr key={movie.id} id={movie.id}>
-              <td><Link to="/details/" onClick={this.props.getId}>{movie.title}</Link></td>
+              <td><Link to="/details" onClick={this.props.getId}>{movie.title}</Link></td>
               <td>{movie.director}</td>
               <td>{movie.rating}</td>
+              <td><Link to="/edit" onClick={this.props.getId}>Edit movie</Link></td>
+              <td><Delete id={movie.id}/></td>
             </tr>
           )
         })
@@ -28,6 +31,9 @@ class Home extends Component {
   render() {
     return (
       <>
+        <Helmet>
+          <title>Home</title>
+        </Helmet>
         <h1>Main</h1>
         <table>
           <thead>
@@ -38,7 +44,7 @@ class Home extends Component {
           </tr>
           </thead>
           <tbody>
-          {this.state.tbody}
+            {this.state.tbody}
           </tbody>
         </table>
       </>
