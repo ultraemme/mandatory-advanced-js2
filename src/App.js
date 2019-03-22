@@ -7,10 +7,6 @@ import Edit from './components/Edit';
 import Details from './components/Details';
 import Home from './components/Home';
 
-function formatWindowLocation (string) {
-  return string.replace("/", "").charAt(0).toUpperCase() + string.slice(2);
-}
-
 class App extends Component {
   constructor(props) {
     super(props);
