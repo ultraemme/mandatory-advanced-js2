@@ -20,6 +20,9 @@ class Edit extends Component {
           rating: parseInt(res.data.rating)
         });
       })
+      .catch(err => {
+
+      })
   }
 
   handleSubmit(e) {
@@ -28,23 +31,22 @@ class Edit extends Component {
       title: this.state.title,
       description: this.state.description,
       director: this.state.director,
-      rating: parseInt(this.state.rating)
+      rating: parseFloat(this.state.rating)
     };
+    console.log(data);
 
     const API_ROOT = 'http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000';
     axios.put(API_ROOT + '/movies/' + this.props.id, data)
-      .then((res) => {
+      .then(res => {
         this.setState({redirect: true});
-        console.log('success');
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       })
   }
 
   handleChange(e) {
     this.setState({[e.target.id]: e.target.value});
-    console.log(this.state);
   }
 
   render() {

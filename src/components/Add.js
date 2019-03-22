@@ -20,7 +20,7 @@ class Add extends Component {
 
     const API_ROOT = 'http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000';
     axios.post(API_ROOT + '/movies', data)
-      .then((res) => {
+      .then(res => {
         this.setState({redirect: true});
       })
   }
