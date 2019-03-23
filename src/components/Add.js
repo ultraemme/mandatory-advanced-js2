@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import axios from 'axios'
-import {Redirect} from 'react-router-dom';
-import {Helmet} from 'react-helmet';
 
 class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.CancelToken = axios.CancelToken;
+    this.source = this.CancelToken.source();
   }
 
   handleSubmit(e) {
@@ -19,10 +21,21 @@ class Add extends Component {
     };
 
     const API_ROOT = 'http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000';
-    axios.post(API_ROOT + '/movies', data)
+    axios.post(API_ROOT + '/movies', data, {cancelToken: this.source.token})
       .then(res => {
         this.setState({redirect: true});
       })
+      .catch(err => {
+        if(axios.isCancel(err)) {
+          console.log('Canceled the request of adding the new movie.');
+        } else {
+          console.log('Real error! -> ', err);
+        }
+      })
+  }
+
+  componentWillUnmount () {
+    this.source.cancel('Request canceled.');
   }
 
   handleChange(e) {
@@ -40,6 +53,7 @@ class Add extends Component {
           <Helmet>
             <title>Add</title>
           </Helmet>
+          <h1>Add a new movie</h1>
           <form action="" onSubmit={this.handleSubmit.bind(this)}>
             <label htmlFor="">Title</label><br/>
             <input onChange={this.handleChange.bind(this)} id="title" type="text"/><br/><br/>

@@ -6,6 +6,10 @@ import Edit from './components/Edit';
 import Details from './components/Details';
 import Home from './components/Home';
 
+const formatWindowLocation = function(str) {
+  return str.toUpperCase().charAt(1) + str.slice(2);
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
