@@ -55,13 +55,13 @@ class Add extends Component {
           </Helmet>
           <h1>Add a new movie</h1>
           <form action="" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="">Title</label><br/>
+            <label htmlFor="">Title:</label><br/>
             <input onChange={this.handleChange.bind(this)} id="title" type="text"/><br/><br/>
-            <label htmlFor="">Description</label><br/>
+            <label htmlFor="">Description:</label><br/>
             <textarea onChange={this.handleChange.bind(this)} id="description" cols="30" rows="10"/><br/><br/>
-            <label htmlFor="">Director</label><br/>
+            <label htmlFor="">Director:</label><br/>
             <input onChange={this.handleChange.bind(this)} id="director" type="text"/><br/><br/>
-            <label htmlFor="">Rating</label><br/>
+            <label htmlFor="">Rating: <strong>{this.state.rating}</strong></label><br/>
             <input onChange={this.handleChange.bind(this)} id="rating" type="range" min="0" max="5" step="0.1"/><br/><br/>
             <button type="submit">Add movie</button>
           </form>

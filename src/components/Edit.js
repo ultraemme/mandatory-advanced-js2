@@ -20,7 +20,7 @@ class Edit extends Component {
           title: res.data.title,
           description: res.data.description,
           director: res.data.director,
-          rating: parseInt(res.data.rating)
+          rating: parseFloat(res.data.rating)
         });
       })
       .catch(err => {
@@ -78,13 +78,13 @@ class Edit extends Component {
           <>
             <h1>Edit {this.state.title}</h1>
             <form action="" onSubmit={this.handleSubmit.bind(this)}>
-              <label htmlFor="">Title</label><br/>
+              <label htmlFor="">Title:</label><br/>
               <input onChange={this.handleChange.bind(this)} id="title" type="text" value={this.state.title}/><br/><br/>
-              <label htmlFor="">Description</label><br/>
+              <label htmlFor="">Description:</label><br/>
               <textarea onChange={this.handleChange.bind(this)} id="description" cols="30" rows="10" value={this.state.description}/><br/><br/>
-              <label htmlFor="">Director</label><br/>
+              <label htmlFor="">Director:</label><br/>
               <input onChange={this.handleChange.bind(this)} id="director" type="text" value={this.state.director}/><br/><br/>
-              <label htmlFor="">Rating</label><br/>
+              <label htmlFor="">Rating: <strong>{this.state.rating}</strong></label><br/>
               <input onChange={this.handleChange.bind(this)} id="rating" type="range" min="0" max="5" step="0.1" value={this.state.rating}/><br/><br/>
               <button type="submit">Edit movie</button>
             </form>
