@@ -17,7 +17,7 @@ class Add extends Component {
       title: this.state.title,
       description: this.state.description,
       director: this.state.director,
-      rating: parseInt(this.state.rating)
+      rating: parseFloat(this.state.rating)
     };
 
     const API_ROOT = 'http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000';
