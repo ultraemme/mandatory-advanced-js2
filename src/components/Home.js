@@ -33,6 +33,7 @@ class Home extends Component {
   handleDelete(e) {
     const targetId = e.nativeEvent.path[2].id;
     const API_ROOT = 'http://ec2-13-53-132-57.eu-north-1.compute.amazonaws.com:3000';
+    e.nativeEvent.path[2].parentNode.removeChild(e.nativeEvent.path[2]);
     axios.delete(API_ROOT + '/movies/' + targetId, {cancelToken: this.source.token})
       .then(res => {
         const movies = this.state.movies.filter(movie => {
